@@ -1,10 +1,21 @@
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.junit.Before;
 import org.junit.Test;
 
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class BasicGet {
+
+    //builds config values for use in tests
+    @Before
+    public void setup() {
+        RestAssured.baseURI = "http://pokeapi.co/api/v2";
+        //RestAssured.port = 443;
+    }
 
     @Test
     public void exampleRestTest() {
@@ -32,4 +43,10 @@ public class BasicGet {
                 assertThat().
                 body("md5",equalTo(expectedMd5CheckSum));
     }
+    @Test
+    public void whenRequestGet_thenOK(){
+        when().request("GET", baseURI)
+        .then().statusCode(200);
+    }
+
 }
