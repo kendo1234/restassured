@@ -19,6 +19,7 @@ public class MeasureResponseTime {
         RestAssured.port = 443;
     }
 
+
     @Test
     public void whenMeasureResponseTime_thenOK() {
         Response response = RestAssured.get("/pokemon/6/");
