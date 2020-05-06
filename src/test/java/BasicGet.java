@@ -8,14 +8,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class BasicGet {
-
-    //builds config values for use in tests
-    @Before
-    public void setup() {
-        RestAssured.baseURI = "http://pokeapi.co/api/v2";
-        //RestAssured.port = 443;
-    }
+public class BasicGet extends ApiTest{
 
     @Test
     public void exampleRestTest() {
@@ -23,7 +16,7 @@ public class BasicGet {
                 .contentType(ContentType.JSON)
                 .pathParam("id", "pokemon/4/") //example of defining a path parameter, sets the param type and endpoint to yield it from
         .when()
-                .get("http://pokeapi.co/api/v2/{id}")
+                .get("/{id}")
         .then()
                 .statusCode(200)
                 .body("name", equalTo("charmander"));
